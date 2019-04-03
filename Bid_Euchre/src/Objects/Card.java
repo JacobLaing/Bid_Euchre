@@ -3,14 +3,19 @@ package Objects;
 public class Card {
 
     private int rank, suit;
-    private String[] suits = {"hearts", "spades", "diamonds", "clubs"};
-    private String[] ranks = {"9", "10", "Jack", "Queen", "King", "Ace"};
+    final private String[] SUITS = {"hearts", "spades", "diamonds", "clubs"};
+    final private String[] RANKS = {"9", "10", "Jack", "Queen", "King", "Ace"};
+
+    public Card() { }
 
     public Card(int rank, int suit) {
         this.rank = rank;
         this.suit = suit;
     }
 
-    protected String getRank() { return ranks[rank]; }
-    protected String getSuit() { return suits[suit]; }
+    public String getRank() { return RANKS[rank]; }
+    public void setRank(int rank) { this.rank = rank; }
+
+    public String getSuit() { return SUITS[suit]; }
+    public void setSuit(int suit) { this.suit = suit; }
 }
