@@ -6,17 +6,19 @@ public class Player {
 
     private String name, suit;
     private int team, tricks, bidAmount;
+    private boolean isDealer;
     private ArrayList<Card> cards;
 
     public Player() {};
 
-    public Player(String name, int team, ArrayList<Card> cards, int tricks, int bidAmount, String suit) {
+    public Player(String name, int team, ArrayList<Card> cards, int tricks, int bidAmount, String suit, boolean isDealer) {
         this.name = name;
         this.team = team;
         this.cards = cards;
         this.tricks = tricks;
         this.bidAmount = bidAmount;
         this.suit = suit;
+        this.isDealer = isDealer;
     }
 
     public void setName(String name) { this.name = name; }
@@ -36,4 +38,7 @@ public class Player {
 
     public void setSuit(String suit) { this.suit = suit; }
     public String getSuit() { return suit; }
+
+    public void setIsDealer(boolean isDealer) { this.isDealer = isDealer; }
+    public boolean getIsDealer() { return isDealer; }
 }

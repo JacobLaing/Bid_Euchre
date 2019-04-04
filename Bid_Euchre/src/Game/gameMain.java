@@ -5,26 +5,120 @@ import Objects.Player;
 import Objects.Team;
 import Objects.cardDeck;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class gameMain {
 
     final static int PLAYERS = 6;
+    private final static ArrayList<Integer> PLAYER1VALUES = new ArrayList<>(Arrays.asList(5, 11, 17, 23, 29, 35, 41, 47));
+    private final static ArrayList<Integer> PLAYER2VALUES = new ArrayList<>(Arrays.asList(0, 6, 12, 18, 24, 30, 36, 42));
+    private final static ArrayList<Integer> PLAYER3VALUES = new ArrayList<>(Arrays.asList(1, 7, 13, 19, 25, 31, 37, 43));
+    private final static ArrayList<Integer> PLAYER4VALUES = new ArrayList<>(Arrays.asList(2, 8, 14, 20, 26, 32, 38, 44));
+    private final static ArrayList<Integer> PLAYER5VALUES = new ArrayList<>(Arrays.asList(3, 9, 15, 21, 27, 33, 39, 45));
+    private final static ArrayList<Integer> PLAYER6VALUES = new ArrayList<>(Arrays.asList(4, 10, 16, 22, 28, 34, 40, 46));
+    private static ArrayList<Player> players = new ArrayList<>();
+    private static Team us, them;
 
-    private Team us, them;
+    private static void setTeams(ArrayList<Integer> firstJacks) {
+        for (int i = 0; i < 3; i++) {
+            boolean playerAdded = false;
+            while (!playerAdded) {
+                if (PLAYER2VALUES.contains(firstJacks.get(i))) {
+                    if (players.get(1).getTeam() != 1) {
+                        players.get(1).setTeam(1);
+                        playerAdded = true;
+                        if (i == 0) {
+                            players.get(1).setIsDealer(true);
+                        }
+                    }
+                    else {
+                        firstJacks.set(i, firstJacks.get(i) + 1);
+                    }
+                }
+                if (PLAYER3VALUES.contains(firstJacks.get(i))) {
+                    if (players.get(2).getTeam() != 1) {
+                        players.get(2).setTeam(1);
+                        playerAdded = true;
+                        if (i == 0) {
+                            players.get(2).setIsDealer(true);
+                        }
+                    }
+                    else {
+                        firstJacks.set(i, firstJacks.get(i) + 1);
+                    }
+                }
+                if (PLAYER4VALUES.contains(firstJacks.get(i))) {
+                    if (players.get(3).getTeam() != 1) {
+                        players.get(3).setTeam(1);
+                        playerAdded = true;
+                        if (i == 0) {
+                            players.get(3).setIsDealer(true);
+                        }
+                    }
+                    else {
+                        firstJacks.set(i, firstJacks.get(i) + 1);
+                    }
+                }
+                if (PLAYER5VALUES.contains(firstJacks.get(i))) {
+                    if (players.get(4).getTeam() != 1) {
+                        players.get(4).setTeam(1);
+                        playerAdded = true;
+                        if (i == 0) {
+                            players.get(4).setIsDealer(true);
+                        }
+                    }
+                    else {
+                        firstJacks.set(i, firstJacks.get(i) + 1);
+                    }
+                }
+                if (PLAYER6VALUES.contains(firstJacks.get(i))) {
+                    if (players.get(5).getTeam() != 1) {
+                        players.get(5).setTeam(1);
+                        playerAdded = true;
+                        if (i == 0) {
+                            players.get(5).setIsDealer(true);
+                        }
+                    }
+                    else {
+                        firstJacks.set(i, firstJacks.get(i) + 1);
+                    }
+                }
+                if (PLAYER1VALUES.contains(firstJacks.get(i))) {
+                    if (players.get(0).getTeam() != 1) {
+                        players.get(0).setTeam(1);
+                        playerAdded = true;
+                        if (i == 0) {
+                            players.get(0).setIsDealer(true);
+                        }
+                    }
+                    else {
+                        firstJacks.set(i, firstJacks.get(i) + 1);
+                    }
+                }
+            }
+        }
+        for (Player player : players) {
+            if (player.getTeam() == 1) {
+                them.addPlayer(player);
+            }
+            else {
+                us.addPlayer(player);
+            }
+        }
+    }
 
     public static void main(String[] args) {
 
-        Player player1, player2, player3, player4, player5, player6;
-        player1 = new Player("Player 1", 0, null, 0, 0, null);
-        player2 = new Player("Player 2", 0, null, 0, 0, null);
-        player3 = new Player("Player 3", 0, null, 0, 0, null);
-        player4 = new Player("Player 4", 0, null, 0, 0, null);
-        player5 = new Player("Player 5", 0, null, 0, 0, null);
-        player6 = new Player("Player 6", 0, null, 0, 0, null);
-        Player[] players = {player1, player2, player3, player4, player5, player6};
+        for (int i = 0; i < PLAYERS; i++) {
+            players.add(new Player("Player " + (i + 1), 0, null, 0, 0, null, false));
+        }
+        us = new Team();
+        them = new Team();
 
+        /*
         Scanner reader = new Scanner(System.in);
         for (int i = 0; i < PLAYERS; i++) {
             String name = "";
@@ -35,74 +129,22 @@ public class gameMain {
             players[i].setName(name);
         }
         reader.close();
+        */
 
         cardDeck deck = new cardDeck();
-        deck.printDeck();
         ArrayList<Integer> firstThreeJacks = deck.getFirstThreeJacks();
-        for (int jackLocation : firstThreeJacks) {
-            switch (jackLocation) {
-                case 0:
-                case 6:
-                case 12:
-                case 18:
-                case 24:
-                case 30:
-                case 36:
-                case 42:
-                    //player2
-                    break;
-                case 1:
-                case 7:
-                case 13:
-                case 19:
-                case 25:
-                case 31:
-                case 37:
-                case 43:
-                    //player3
-                    break;
-                case 2:
-                case 8:
-                case 14:
-                case 20:
-                case 26:
-                case 32:
-                case 38:
-                case 44:
-                    //player4
-                    break;
-                case 3:
-                case 9:
-                case 15:
-                case 21:
-                case 27:
-                case 33:
-                case 39:
-                case 45:
-                    //player5
-                    break;
-                case 4:
-                case 10:
-                case 16:
-                case 22:
-                case 28:
-                case 34:
-                case 40:
-                case 46:
-                    //player6
-                    break;
-                case 5:
-                case 11:
-                case 17:
-                case 23:
-                case 29:
-                case 35:
-                case 41:
-                case 47:
-                    //player1
-                    break;
-            }
-        }
+        setTeams(firstThreeJacks);
+
         System.out.println(firstThreeJacks.toString());
+        System.out.println();
+        System.out.println("US:");
+        for (Player player : us.getPlayers()) {
+            System.out.println(player.getName() + " " + player.getIsDealer());
+        }
+        System.out.println();
+        System.out.println("THEM:");
+        for (Player player : them.getPlayers()) {
+            System.out.println(player.getName() + " " + player.getIsDealer());
+        }
     }
 }
