@@ -22,6 +22,19 @@ public class gameMain {
     private static ArrayList<Player> players = new ArrayList<>();
     private static Team us, them;
 
+    private static void setPlayerNames() {
+        Scanner reader = new Scanner(System.in);
+        for (int i = 0; i < PLAYERS; i++) {
+            String name = "";
+            while (name.isEmpty()) {
+                System.out.print("Enter player " + (i + 1) + "'s name: ");
+                name = reader.next();
+            }
+            players.get(i).setName(name);
+        }
+        reader.close();
+    }
+
     private static void setTeams(ArrayList<Integer> firstJacks) {
         for (int i = 0; i < 3; i++) {
             boolean playerAdded = false;
@@ -117,34 +130,19 @@ public class gameMain {
         }
         us = new Team();
         them = new Team();
-
-        /*
-        Scanner reader = new Scanner(System.in);
-        for (int i = 0; i < PLAYERS; i++) {
-            String name = "";
-            while (name.isEmpty()) {
-                System.out.print("Enter player " + (i + 1) + "'s name: ");
-                name = reader.next();
-            }
-            players[i].setName(name);
-        }
-        reader.close();
-        */
-
+        //setPlayerNames();
         cardDeck deck = new cardDeck();
         ArrayList<Integer> firstThreeJacks = deck.getFirstThreeJacks();
         setTeams(firstThreeJacks);
-
-        System.out.println(firstThreeJacks.toString());
-        System.out.println();
-        System.out.println("US:");
-        for (Player player : us.getPlayers()) {
-            System.out.println(player.getName() + " " + player.getIsDealer());
-        }
-        System.out.println();
-        System.out.println("THEM:");
-        for (Player player : them.getPlayers()) {
-            System.out.println(player.getName() + " " + player.getIsDealer());
+        gameBoard board = new gameBoard(players, us, them, deck);
+        while (!board.isOver()) {
+            /**
+             * This is where each game will be played.
+             * When over it should ask to play again with same teams,
+             * with different teams, or quit (terminate). Should they
+             * choose to play with same teams it should keep tally
+             * on which team won the previous game (maybe even include score).
+             */
         }
     }
 }
