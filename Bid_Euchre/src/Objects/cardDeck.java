@@ -14,7 +14,6 @@ public class cardDeck extends Card {
 
     public cardDeck() {
         initialize();
-        shuffle();
     }
 
     public ArrayList<Card> getDeck() {
@@ -56,6 +55,14 @@ public class cardDeck extends Card {
         for (Card card : deck) {
             System.out.println(card.getRank() + " of " + card.getSuit());
         }
+    }
+
+    public int getSize() {
+        return deck.size();
+    }
+
+    public Card get(int index) {
+        return deck.get(index);
     }
 
 

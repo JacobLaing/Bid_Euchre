@@ -126,7 +126,7 @@ public class gameMain {
     public static void main(String[] args) {
 
         for (int i = 0; i < PLAYERS; i++) {
-            players.add(new Player("Player " + (i + 1), 0, null, 0, 0, null, false));
+            players.add(new Player("Player " + (i + 1)));
         }
         us = new Team();
         them = new Team();
@@ -136,6 +136,8 @@ public class gameMain {
         setTeams(firstThreeJacks);
         gameBoard board = new gameBoard(players, us, them, deck);
         while (!board.isOver()) {
+            board.dealCards();
+            board.startBidding();
             /**
              * This is where each game will be played.
              * When over it should ask to play again with same teams,
